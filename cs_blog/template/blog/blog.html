@@ -1,0 +1,36 @@
+{% extends 'new1.html' %}
+
+{% block title %}
+Blog
+{% endblock title %}
+
+{% block body %}
+
+<div class="container my-5">
+    <p class="text-primary">Article by :{{post.author}}</p>
+
+    <h1><p class="text-info">{{post.title}}</p></h1>
+    <h4><p class="blog-post-meta">{{post.timestamp}} </p></h4>
+
+    <p>{{post.content}} </p>
+    <form action='/blog/comment' method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="comment">Comment:</label>
+        <textarea class="form-control" rows="5" id="comment" name='comment'></textarea>
+        
+        {% if user.is_authenticated %}
+        
+        <input type="submit" >
+        {% else %}
+        <button type="button" class="btn btn-success mx-2" data-toggle="modal" data-target="#Login">
+          Login
+        </button>
+
+        {% endif %}
+      </div>
+    </form>
+    
+    
+  </div>
+{% endblock body %}

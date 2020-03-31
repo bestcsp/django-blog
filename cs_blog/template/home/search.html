@@ -1,0 +1,34 @@
+{% extends 'new1.html' %}
+
+{% block title %}
+Search Results:-
+{% endblock title %}
+
+
+{% block body %}
+<div class="container">
+
+<h1>Search Results:-</h1>
+{% if posts|length < 1 %}
+<p class="lead" style="margin-left: 10px;">
+ Nothing Found
+ your search query this <b>{{query}} </b> did not match any results in documents <br>
+ Suggestion:-
+ <ul>   
+     <li>Try another keywords </li>
+    
+    </ul>
+  </p>
+{%else%}
+{% for post in posts %}
+<div class="jumbotron my-4">
+    <p class="text-primary">Article by :{{post.author}}</p>
+    <h1><p class="text-info">{{post.title}}</p></h1>
+    <p class="lead">{{post.content| truncatechars:100}} </p>
+    <a class="btn btn-lg btn-primary" href="/blog/{{post.slug}}" role="button">continue reading »</a>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+
+{% endblock body %}
